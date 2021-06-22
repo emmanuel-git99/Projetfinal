@@ -1,0 +1,93 @@
+<form novalidate #checkoutForm="ngForm">
+    <div class="page">
+        <div class="bg-primary text-white p-2">
+            <div class="navbar-brand font-weight-bold">Pizza Burger House</div>
+        </div>
+        <div class="bd-example">
+            <div class="row g-4 row justify-content-center">
+                <div class="text-center">
+                    <h1 class="font-weight-bold">Informations de contact</h1>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Numéro de téléphone*</label>
+                    <input #phoneNumber="ngModel" type="tel" [(ngModel)]="order.customerPhoneNumber" name="phoneNumber"
+                        class="form-control" required>
+                    <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="text-danger">
+                      Entrez le numéro de téléphone
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Votre nom*</label>
+                    <input #name="ngModel" type="text" [(ngModel)]="order.customerName" name="name" class="form-control"
+                        required>
+                    <div *ngIf="name.invalid && name.touched" class="text-danger">
+                      Entrez un nom
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">E-mail</label>
+                    <input type="mail" [(ngModel)]="order.customerEmail" name="cosmomerEmail" class="form-control">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row g-3 row justify-content-center">
+            <div class="col-md-2">
+                <label class="form-label">Ta ville</label>
+                <select #city="ngModel" class="form-select" [(ngModel)]="order.deliveryOrder.customerCity" name="city"
+                    required aria-label="Default select example">
+                    <option *ngFor="let chooseType of chooseCity">{{chooseType.name}}
+                    </option>
+                </select>
+                <div *ngIf="city.invalid && city.touched" class="text-danger">
+                  Entrez la ville
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Rue</label>
+                <input #street="ngModel" type="text" [(ngModel)]="order.deliveryOrder.customerStreet"
+                    class="form-control" name="street" required>
+                <div *ngIf="street.invalid && street.touched" class="text-danger">
+                    Addresse
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Numéro de maison</label>
+                <input #house="ngModel" type="number" [(ngModel)]="order.deliveryOrder.customerHouseNumber"
+                    class="form-control" name="house" required>
+                <div *ngIf="house.invalid && house.touched" class="text-danger">
+                  Entrez le numéro de la maison
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Appartement</label>
+                <input #apartment="ngModel" type="number" [(ngModel)]="order.deliveryOrder.customerApartmentNumber"
+                    class="form-control" name="apartment" required>
+                <div *ngIf="apartment.invalid && apartment.touched" class="text-danger">
+                  Entrez le numéro de l'appartement
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">entrée</label>
+                <input #entrance="ngModel" type="number" [(ngModel)]="order.deliveryOrder.customerEntranceNumber"
+                    class="form-control" name="entrance" required>
+                <div *ngIf="entrance.invalid && entrance.touched" class="text-danger">
+                  Entrez le numéro d'entrée
+                </div>
+            </div>
+            <app-payment></app-payment>
+            <div class="text-center ">
+                <div>
+                    <h2>Montant de la commande: {{cart.totalPrice}} CFA</h2>
+                </div>
+                <button class="btn btn-danger m-1" [disabled]="checkoutForm.invalid"
+                    (click)="submitOrderDelivery(confirmContent)">Commander</button>
+            </div>
+        </div>
+    </div>
+</form>
+<ng-template #confirmContent let-modal class="">
+    <div class="modal-body">
+        <app-order-confirmation></app-order-confirmation>
+    </div>
+</ng-template>

@@ -1,0 +1,34 @@
+<div class=" text-center bg-primary text-white p-2">
+    <div class="navbar-brand">Pizza Burger House</div>
+</div>
+<h2 class="text-center m-2">Confirmation de commande</h2>
+<div class="container">
+    <table *ngIf="order.orderConfirmation; else nodata" class="table m-2">
+        <tr>
+            <th>Numéro de commande</th>
+            <td>{{order.orderConfirmation.orderId}}</td>
+        </tr>
+        <tr>
+            <th>Votre nom</th>
+            <td>{{order.orderConfirmation.orderName}}</td>
+        </tr>
+        <tr>
+            <th>Ton téléphone</th>
+            <td>{{order.orderConfirmation.orderPhone}}</td>
+        </tr>
+        <tr>
+            <th>Le prix final</th>
+            <td>{{order.orderConfirmation.amount}}</td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <button class="btn btn-primary m-1" routerLink="/" (click)="closeModal()">Fait</button>
+    </div>
+    <ng-template #nodata>
+        <div class="d-flex justify-content-center x  m-3">
+            <div class="spinner-border " role="status" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Envoi de la commande...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>

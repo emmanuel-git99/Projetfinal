@@ -1,0 +1,40 @@
+<div *ngIf="!spinner; else loader" class="container">
+    <div *ngFor="let product of products" class="product-block">
+        <div class="product-img">
+            <img [src]='apiUrl + product?.path' alt="Pizza 5 fromages">
+        </div>
+        <div class="product-title">
+            <h4>{{product.productName}}</h4>
+            <p>{{product.productDescription}}</p>
+        </div>
+        <div class="product-description">
+            <div>
+                <select class="form-select " aria-label="Default select example">
+                    <option selected>Taille</option>
+                    <option value="1">22</option>
+                    <option value="2">26</option>
+                    <option value="3">30</option>
+                </select>
+                <div>
+                    {{product.price }} CFA<br>
+                    {{product.productWeight}} gr
+                </div>
+            </div>
+            <div>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="1">Classique</option>
+                    <option value="2">Mince</option>
+                </select>
+                <div class="btn-cart">
+                    <input type="button" (click)="addCart(product)" class="btn btn-danger" value="Ajouter au panier">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #loader>
+    <div>
+        <p class="fig" class="fig"> <img src="./assets/image/preloader.gif" alt="">
+        </p>
+    </div>
+</ng-template>

@@ -1,0 +1,25 @@
+<div *ngIf="!spinner; else loader" class="container">
+     <div *ngFor="let product of products" class="product-block">
+          <div class="product-img">
+               <img [src]='apiUrl + product?.path' alt="Frites">
+          </div>
+          <span>
+               <h4>{{product.productName}}</h4>
+          </span>
+          <span>
+               <h4>{{product.price}} CFA</h4>
+          </span>
+          <div>
+               <h4>{{product.productWeight}} grammes</h4>
+          </div>
+          <div class="btn-cart">
+               <input type="button" (click)="addCart(product)" class="btn btn-danger" value="Ajouter au panier">
+          </div>
+     </div>
+</div>
+<ng-template #loader>
+     <div>
+          <p class="fig" class="fig"> <img src="./assets/image/preloader.gif" alt="">
+          </p>
+     </div>
+</ng-template>
